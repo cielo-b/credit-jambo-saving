@@ -124,7 +124,26 @@ npm start
 
 The server will start on `http://localhost:5000`
 
-## 📚 API Endpoints
+## 📚 API Documentation
+
+### 🎯 Interactive Swagger Documentation
+
+The API includes **comprehensive Swagger/OpenAPI 3.0 documentation**:
+
+- **Swagger UI**: http://localhost:5000/api-docs
+  - Interactive API explorer
+  - Try endpoints directly from browser
+  - View schemas and examples
+  - Test authentication
+
+- **OpenAPI JSON**: http://localhost:5000/api-docs.json
+  - Machine-readable API specification
+  - Import into Postman, Insomnia, etc.
+  - Generate client SDKs
+
+📖 **For complete API documentation with examples**, see [API_DOCUMENTATION.md](./API_DOCUMENTATION.md)
+
+## 📚 API Endpoints Quick Reference
 
 ### Authentication
 

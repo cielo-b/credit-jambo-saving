@@ -251,40 +251,47 @@ After seeding the database:
 - **Password:** password123
 - **Access:** Mobile App
 
-## 📡 API Endpoints
+## 📡 API Documentation
 
-### Authentication
+### Swagger UI (Interactive Documentation)
 
+The API includes comprehensive **Swagger/OpenAPI 3.0** documentation:
+
+- **Swagger UI**: http://localhost:5000/api-docs
+- **OpenAPI JSON**: http://localhost:5000/api-docs.json
+
+### Quick API Reference
+
+#### Authentication
 ```
 POST   /api/auth/register      # Register new user
 POST   /api/auth/login         # Login user
-GET    /api/auth/me            # Get current user
+GET    /api/auth/me            # Get current user (protected)
 ```
 
-### Transactions (Protected)
-
+#### Transactions (Protected)
 ```
 POST   /api/transactions/deposit    # Make deposit
 POST   /api/transactions/withdraw   # Make withdrawal
-GET    /api/transactions/history    # Get transaction history
+GET    /api/transactions/history    # Get transaction history (with pagination)
 GET    /api/transactions/balance    # Get current balance
 ```
 
-### Admin (Protected - Admin Only)
-
+#### Admin (Protected - Admin Only)
 ```
-GET    /api/admin/users            # Get all users
+GET    /api/admin/users            # Get all users (with pagination)
 POST   /api/admin/verify-device    # Verify user device
-GET    /api/admin/transactions     # Get all transactions
+GET    /api/admin/transactions     # Get all transactions (with filters)
 GET    /api/admin/stats            # Get dashboard statistics
 GET    /api/admin/pending-devices  # Get pending verifications
 ```
 
-### Health Check
-
+#### Health Check
 ```
 GET    /api/health                 # API health status
 ```
+
+📖 **For detailed API documentation, examples, and testing**, see [savings-backend/API_DOCUMENTATION.md](savings-backend/API_DOCUMENTATION.md)
 
 ## 🗄️ Database Schema
 

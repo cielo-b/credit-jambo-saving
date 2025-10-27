@@ -4,8 +4,10 @@ import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
+import swaggerUi from "swagger-ui-express";
 import { initializeDatabase } from "./config/database";
 import routes from "./routes";
+import swaggerSpec from "./config/swagger";
 import {
   errorHandler,
   notFoundHandler,
@@ -49,14 +51,32 @@ app.use("/api/auth", limiter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Swagger Documentation
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec, {
+    customCss: ".swagger-ui .topbar { display: none }",
+    customSiteTitle: "Credit Jambo API Documentation",
+    customfavIcon: "/favicon.ico",
+  })
+);
+
+// Swagger JSON
+app.get("/api-docs.json", (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.send(swaggerSpec);
+});
+
 // API routes
 app.use("/api", routes);
 
 // Root route
 app.get("/", (req, res) => {
   res.json({
-    message: "Savings Management API",
+    message: "Credit Jambo Savings Management API",
     version: "1.0.0",
+    documentation: "/api-docs",
     endpoints: {
       health: "/api/health",
       auth: "/api/auth",
@@ -81,12 +101,16 @@ const startServer = async () => {
       console.log(`
 ╔════════════════════════════════════════════════════════════╗
 ║                                                            ║
-║   💰 Savings Management System API                        ║
+║   💰 Credit Jambo - Savings Management System API         ║
 ║                                                            ║
 ║   Server running on port ${PORT}                            ║
 ║   Environment: ${process.env.NODE_ENV || "development"}                     ║
 ║                                                            ║
-║   API Endpoints:                                           ║
+║   📚 API Documentation:                                    ║
+║   - Swagger UI: http://localhost:${PORT}/api-docs           ║
+║   - OpenAPI JSON: http://localhost:${PORT}/api-docs.json    ║
+║                                                            ║
+║   🔗 API Endpoints:                                        ║
 ║   - Health: http://localhost:${PORT}/api/health             ║
 ║   - Auth: http://localhost:${PORT}/api/auth                 ║
 ║   - Transactions: http://localhost:${PORT}/api/transactions ║
